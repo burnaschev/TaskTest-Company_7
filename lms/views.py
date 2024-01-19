@@ -1,8 +1,8 @@
-from rest_framework import generics
+from rest_framework import generics, viewsets
 
-from lms.models import Lesson
+from lms.models import Lesson, Well
 from lms.paginators import LMSPaginator
-from lms.serializers import LessonSerializers
+from lms.serializers import LessonSerializers, WellSerializers
 
 
 class LessonCreateAPIView(generics.CreateAPIView):
@@ -28,3 +28,9 @@ class LessonUpdateAPIView(generics.UpdateAPIView):
 class LessonDestroyAPIView(generics.DestroyAPIView):
     serializer_class = LessonSerializers
     queryset = Lesson.objects.all()
+
+
+class WellViewSet(viewsets.ModelViewSet):
+    serializer_class = WellSerializers
+    queryset = Well.objects.all()
+    pagination_class = LMSPaginator
