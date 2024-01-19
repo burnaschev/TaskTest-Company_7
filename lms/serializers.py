@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from lms.models import Lesson, Well
+from lms.models import Lesson, Well, Subscription
 
 
 class LessonSerializers(serializers.ModelSerializer):
@@ -27,3 +27,9 @@ class WellSerializers(serializers.ModelSerializer):
             return "Подписан на курс"
         else:
             return "Не подписан"
+
+
+class SubscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subscription
+        fields = '__all__'

@@ -1,8 +1,8 @@
 from rest_framework import generics, viewsets
 
-from lms.models import Lesson, Well
+from lms.models import Lesson, Well, Subscription
 from lms.paginators import LMSPaginator
-from lms.serializers import LessonSerializers, WellSerializers
+from lms.serializers import LessonSerializers, WellSerializers, SubscriptionSerializer
 
 
 class LessonCreateAPIView(generics.CreateAPIView):
@@ -34,3 +34,15 @@ class WellViewSet(viewsets.ModelViewSet):
     serializer_class = WellSerializers
     queryset = Well.objects.all()
     pagination_class = LMSPaginator
+
+
+class SubscriptionViewSet(viewsets.ModelViewSet):
+    serializer_class = SubscriptionSerializer
+    queryset = Subscription.objects.all()
+
+    def perform_create(self, serializer):
+        new_sub = serializer.save()
+        new_sub.users = self.request.user
+        new_sub.save()
+
+

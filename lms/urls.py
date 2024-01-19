@@ -9,6 +9,7 @@ app_name = LmsConfig.name
 
 router = DefaultRouter()
 router.register(r'well', WellViewSet, basename='well')
+router.register(r'subscription', WellViewSet, basename='subscription')
 
 urlpatterns = [
     path('lesson/', LessonListAPIView.as_view(), name='lesson_list'),
